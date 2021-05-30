@@ -5,6 +5,7 @@ import {switchMap} from 'rxjs/operators';
 import {Post} from '../../shared/interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AlertService} from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-edit-page',
@@ -21,7 +22,8 @@ export class EditPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private alert: AlertService
   ) {
   }
 
@@ -60,6 +62,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       author: this.form.value.author
     }).subscribe(() => {
       this.submitted = false;
+      this.alert.success('Post has been edited');
     })
   }
 }
